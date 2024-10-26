@@ -5,7 +5,7 @@ import { Types } from 'mongoose';
   collection: 'employee_items',
   timestamps: true,
 })
-export class EmployeeItems {
+export class EmployeeItem {
   _id?: Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
@@ -23,4 +23,4 @@ export class EmployeeItems {
   issueDate: Date;
 }
 
-export const EmployeeItemSchema = SchemaFactory.createForClass(EmployeeItems);
+export const EmployeeItemSchema = SchemaFactory.createForClass(EmployeeItem);

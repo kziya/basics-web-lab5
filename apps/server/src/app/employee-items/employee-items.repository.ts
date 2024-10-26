@@ -1,36 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { EmployeeItems } from './employee-items.schema';
+import { EmployeeItem } from './employee-items.schema';
 import { Model, Types, UpdateWriteOpResult } from 'mongoose';
+import { CreateEmployeeItem, UpdateEmployeeItem } from './employee-items.dtos';
 
 @Injectable()
 export class EmployeeItemsRepository {
   constructor(
-    @InjectModel(EmployeeItems.name)
-    private readonly employeeItemModel: Model<EmployeeItems>
+    @InjectModel(EmployeeItem.name)
+    private readonly employeeItemModel: Model<EmployeeItem>
   ) {}
 
-  getEmployeeItemList(): Promise<EmployeeItems[]> {
-    return this.employeeItemModel.find();
+  async findAll(): Promise<EmployeeItem[]> {
+    return this.employeeItemModel.find().exec();
   }
 
-  async createEmployeeItem(
-    employeeItem: EmployeeItems
-  ): Promise<EmployeeItems> {
-    return this.employeeItemModel.create(employeeItem);
+  async findOne(id: string): Promise<EmployeeItem> {
+    return this.employeeItemModel.findById(id).exec();
   }
 
-  updateEmployeeItem(
-    id: string,
-    employeeItem: EmployeeItems
-  ): Promise<UpdateWriteOpResult> {
-    return this.employeeItemModel.updateOne(
-      { _id: new Types.ObjectId(id) },
-      { $set: employeeItem }
-    );
+  async create(data: CreateEmployeeItem): Promise<EmployeeItem> {
+    return this.employeeItemModel.create(data);
   }
 
-  async deleteEmployeeItem(id: string): Promise<void> {
-    await this.employeeItemModel.deleteOne({ _id: new Types.ObjectId(id) });
+  async update(id: string, data: UpdateEmployeeItem): Promise<EmployeeItem> {
+    return this.employeeItemModel
+      .findByIdAndUpdate(id, data, { new: true })
+      .exec();
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const result = await this.employeeItemModel.deleteOne({ _id: id }).exec();
+    return result.deletedCount > 0;
   }
 }

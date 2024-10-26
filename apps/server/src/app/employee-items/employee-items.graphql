@@ -1,0 +1,50 @@
+type Query {
+  employeeItems: [EmployeeItem]
+  employeeItem(id: ID): EmployeeItem
+}
+
+type Mutation {
+  createEmployeeItem(createEmployeeItem: CreateEmployeeItem!  ): EmployeeItem
+
+  updateEmployeeItem(id: ID!, updateEmployeeItem: UpdateEmployeeItem!): EmployeeItem
+
+  deleteEmployeeItem(id: ID!): Boolean
+}
+
+
+type EmployeeItem{
+  _id: ID!
+
+  surname: String!
+
+  roomNumber: String!
+
+  itemName: String!
+
+  issueDate: String!
+
+  createdAt: String!
+
+  updatedAt: String!
+}
+
+input UpdateEmployeeItem {
+  surname: String!
+
+  roomNumber: String!
+
+  itemName: String!
+
+  issueDate: String!
+}
+
+
+input CreateEmployeeItem {
+  surname: String!
+
+  roomNumber: String!
+
+  itemName: String!
+
+  issueDate: String!
+}
