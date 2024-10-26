@@ -1,0 +1,31 @@
+query{
+  employeeItems {
+    _id
+  }
+  employeeItem(id: "671d3325576515afd3332c2e") {
+    itemName
+  }
+}
+
+mutation {
+  # createEmployeeItem(createEmployeeItem: {
+  #     surname: "Doe"
+  #     roomNumber: "101"
+  #     itemName: "Laptop"
+  #     issueDate: "2024-10-26"
+  #   }) {
+  #  _id
+  # }
+
+
+  # updateEmployeeItem(id: "671d301e4e89feb057bcde8b", updateEmployeeItem: {
+  #        surname: "Doe"
+  #     roomNumber: "101"
+  #     itemName: "Laptop"
+  #     issueDate: "2024-10-26"
+  # }) {
+  #   _id
+  # }
+
+  deleteEmployeeItem(id: "671d301e4e89feb057bcde8b")
+}
